@@ -13,35 +13,26 @@
     </div>
     <script>
       /*En el sitio https://swapi.dev/ puedes encontrar la documentación de la API de Star Wars. Escribe un programa que realice tres peticiones (la persona 1, el planeta 1 y la nave 1) y que muestre en un documento HTML de tres columnas la información devuelta por la API, formateada con las etiquetas HTML que consideres.*/
+      const url = "https://swapi.dev/api/";
       function fetchData(url) {
         return fetch(url).then((response) => response.json());
       }
-
-      // Realizar las peticiones y mostrar los resultados
-      const apiBase = "https://swapi.dev/api/";
-
-      fetchData(`${apiBase}people/1`).then((data) => {
-        document.getElementById("persona").innerHTML += `<p>Nombre: ${data.name}</p>
-                                                                <p>Altura: ${data.height}</p>
-                                                                <p>Peso: ${data.mass}</p>`;
+      fetchData(`${url}people/1`).then((data) => {
+        for (const key in data) {
+          if (key === "homeworld") document.getElementById("persona").innerHTML += `<a href="${data[key]}"> ${key}</a>`;
+          else document.getElementById("persona").innerHTML += `<p> ${key} : ${data[key]}</p>`;
+        }
       });
-
-      fetchData(`${apiBase}planets/1`).then((data) => {
-        document.getElementById("planeta").innerHTML += `<p>Nombre: ${data.name}</p>
-                                                                 <p>Clima: ${data.climate}</p>
-                                                                 <p>Población: ${data.population}</p>`;
+      fetchData(`${url}planets/1`).then((data) => {
+        for (const key in data) {
+          document.getElementById("planeta").innerHTML += `<p> ${key} : ${data[key]}</p>`;
+        }
       });
-
-      fetchData(`${apiBase}starships/2`)
-        .then((data) => {
-          // Asegúrate de que la nave 2 está disponible; de lo contrario, ajusta el ID
-          document.getElementById("nave").innerHTML += `<p>Nombre: ${data.name}</p>
-                                                              <p>Modelo: ${data.model}</p>
-                                                              <p>Fabricante: ${data.manufacturer}</p>`;
-        })
-        .catch((error) => {
-          console.error("Error al realizar la petición a la API:", error);
-        });
+      fetchData(`${url}starships/2`).then((data) => {
+        for (const key in data) {
+          document.getElementById("nave").innerHTML += `<p> ${key} : ${data[key]}</p>`;
+        }
+      });
     </script>
   </body>
 </html>
