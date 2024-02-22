@@ -9,34 +9,29 @@
     <h1>Búsqueda de productos en Mercado Libre</h1>
     <form id="formularioBusqueda">
       <input type="text" id="inputBusqueda" placeholder="Buscar productos..." />
-      <button type="submit">Buscar</button>
+      <button id="boton" type="submit">Buscar</button>
     </form>
     <div id="resultadosBusqueda"></div>
     <script>
       /*En el sitio https://api.mercadolibre.com/sites/MLA/search?q=libros#options podrás encontrar información sobre cómo realizar peticiones al gigante del comercio electrónico Mercado Libre usando su API pública. Crea una aplicación que consista en un formulario de búsqueda en el que el usuario pueda introducir sus palabras clave. Cuando pulse en buscar, la aplicación debe conectarse en segundo plano con Mercado Libre y mostrar de forma asíncrona(sin recargar la página) los tres primeros resultados devueltos por la API.*/
-      function buscarEnMercadoLibre(query) {
-        const url = `https://api.mercadolibre.com/sites/MLA/search?q=${encodeURIComponent(query)}`;
-        fetch(url)
-          .then((response) => response.json())
-          .then((data) => {
-            mostrarResultados(data.results);
-          })
-          .catch((error) => console.error("Error al buscar en Mercado Libre:", error));
-      }
 
-      function mostrarResultados(resultados) {
-        const contenedorResultados = document.getElementById("resultadosBusqueda");
-        contenedorResultados.innerHTML = ""; // Limpia resultados anteriores
-        resultados.slice(0, 3).forEach((producto) => {
-          const elementoProducto = document.createElement("div");
-          elementoProducto.innerHTML = `
-                    <h2>${producto.title}</h2>
-                    <p>$${producto.price}</p>
-                    <img src="${producto.thumbnail}" alt="${producto.title}" style="width: 100px; height: auto;">
-                `;
-          contenedorResultados.appendChild(elementoProducto);
-        });
+      const url = " https://api.mercadolibre.com/sites/MLA/search?q=";
+      function fetchData(url) {
+        return fetch(url).then((response) => response.json());
       }
+      document.getElementById("boton").addEventListener("click", (e) => {
+        e.preventDefault();
+        let contenidoBusqueda = document.getElementById("inputBusqueda").value;
+        console.log(contenidoBusqueda);
+        fetchData(`${url}${contenidoBusqueda}`).then((data) => {
+          console.log(data);
+          data.results.slice(0, 3).forEach((element) => {
+            document.getElementById("resultadosBusqueda").innerHTML += `
+              <h3>Producto</h3>
+              <p>Titulo: ${element.title}</p>`;
+          });
+        });
+      });
     </script>
   </body>
 </html>
