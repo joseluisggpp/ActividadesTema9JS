@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Actividad 32</title>
+  </head>
+  <body>
+    <div class="container">
+      <div id="persona" class="column"><h2>Persona</h2></div>
+      <div id="planeta" class="column"><h2>Planeta</h2></div>
+      <div id="nave" class="column"><h2>Nave Espacial</h2></div>
+    </div>
+    <script>
+      /*En el sitio https://swapi.dev/ puedes encontrar la documentación de la API de Star Wars. Escribe un programa que realice tres peticiones (la persona 1, el planeta 1 y la nave 1) y que muestre en un documento HTML de tres columnas la información devuelta por la API, formateada con las etiquetas HTML que consideres.*/
+      function fetchData(url) {
+        return fetch(url).then((response) => response.json());
+      }
+
+      // Realizar las peticiones y mostrar los resultados
+      const apiBase = "https://swapi.dev/api/";
+
+      fetchData(`${apiBase}people/1`).then((data) => {
+        document.getElementById("persona").innerHTML += `<p>Nombre: ${data.name}</p>
+                                                                <p>Altura: ${data.height}</p>
+                                                                <p>Peso: ${data.mass}</p>`;
+      });
+
+      fetchData(`${apiBase}planets/1`).then((data) => {
+        document.getElementById("planeta").innerHTML += `<p>Nombre: ${data.name}</p>
+                                                                 <p>Clima: ${data.climate}</p>
+                                                                 <p>Población: ${data.population}</p>`;
+      });
+
+      fetchData(`${apiBase}starships/1`)
+        .then((data) => {
+          // Asegúrate de que la nave 1 está disponible; de lo contrario, ajusta el ID
+          document.getElementById("nave").innerHTML += `<p>Nombre: ${data.name}</p>
+                                                              <p>Modelo: ${data.model}</p>
+                                                              <p>Fabricante: ${data.manufacturer}</p>`;
+        })
+        .catch((error) => {
+          console.error("Error al realizar la petición a la API:", error);
+        });
+    </script>
+  </body>
+</html>

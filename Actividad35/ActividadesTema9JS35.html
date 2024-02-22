@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Actividad 35</title>
+    <style>
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+      .product {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: center;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid">
+      <!-- Los productos se generarán dinámicamente -->
+    </div>
+    <script>
+      /*La Coffee API devuelve una imagen aleatoria relacionada con el mundo del café cada vez que realizamos una petición a la URL https://coffee.alexflipnote.dev/random. Crea una aplicación que muestre en una página HTML una cuadrícula con nueve productos (tres filas y tres columnas) donde cada producto muestre nombre, descripción y precio; todos datos de prueba. Tras la carga del DOM debes realizar peticiones a esta API para ir colocando una imagen a cada producto.*/
+      document.addEventListener("DOMContentLoaded", () => {
+        const grid = document.querySelector(".grid");
+
+        for (let i = 0; i < 9; i++) {
+          fetch("https://coffee.alexflipnote.dev/random")
+            .then((response) => response.json())
+            .then((data) => {
+              const product = document.createElement("div");
+              product.className = "product";
+              product.innerHTML = `
+                    <h3>Producto ${i + 1}</h3>
+                    <p>Descripción del producto ${i + 1}.</p>
+                    <p>Precio: $${(Math.random() * 100).toFixed(2)}</p>
+                    <img src="${data.file}" alt="Coffee Image">
+                `;
+              grid.appendChild(product);
+            })
+            .catch((error) => console.error("Error al cargar la imagen:", error));
+        }
+      });
+    </script>
+  </body>
+</html>

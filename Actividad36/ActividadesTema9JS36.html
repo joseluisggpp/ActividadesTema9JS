@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Actividad 36</title>
+  </head>
+  <body>
+    <script>
+      /*Escribe un programa en el que hagas un uso combinado de la API Fetch y las funciones Async. Explica brevemente qué ventajas aporta esta solución entre todas las posibles*/
+      // Definimos una función asincrónica
+      async function cargarPublicaciones() {
+        try {
+          // Usamos fetch junto con await para esperar la respuesta
+          const respuesta = await fetch("https://jsonplaceholder.typicode.com/posts");
+          // Esperamos la conversión de la respuesta a JSON
+          const publicaciones = await respuesta.json();
+          // Procesamos y mostramos las publicaciones
+          console.log(publicaciones.slice(0, 5)); // Mostramos solo las primeras 5 para simplificar
+        } catch (error) {
+          // Manejo de errores en caso de fallo de la petición
+          console.error("Error al cargar las publicaciones:", error);
+        }
+      }
+
+      // Llamamos a la función asincrónica
+      cargarPublicaciones();
+    </script>
+  </body>
+</html>

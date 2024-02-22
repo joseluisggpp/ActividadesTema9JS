@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Actividad 30</title>
+  </head>
+  <body>
+    <a href="#" id="enlaceEspecial">Haz clic aquí y luego presiona la tecla [G]</a>
+    <script>
+      /*Escribe un programa basado en promesas con el que detectes cuándo el usuario ha realizado dos acciones que te interesan. Cuando se produzca se debe mostrar un mensaje indicando este hecho. Por ejemplo, si el usuario hace clic sobre un enlace y a continuación pulsa la tecla [G], muestra en pantalla <<Patrón detectado>>*/
+      let clicEnEnlace = new Promise((resolve) => {
+        document.getElementById("enlaceEspecial").addEventListener("click", (evento) => {
+          evento.preventDefault(); // Previene la navegación del enlace
+          console.log("Clic en el enlace detectado.");
+          resolve();
+        });
+      });
+
+      let presionarG = new Promise((resolve) => {
+        window.addEventListener("keydown", (evento) => {
+          if (evento.key === "g" || evento.key === "G") {
+            console.log("Tecla [G] presionada.");
+            resolve();
+          }
+        });
+      });
+
+      clicEnEnlace
+        .then(() => {
+          return presionarG;
+        })
+        .then(() => {
+          alert("Patrón detectado");
+        });
+    </script>
+  </body>
+</html>

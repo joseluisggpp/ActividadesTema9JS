@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Actividad 28</title>
+  </head>
+  <body>
+    <script>
+      /*Escribe un programa que resuelva alguna tarea de tu interés y en cuya solución hayas utilizado un callback hell.*/
+      // Simulación de una operación asíncrona para obtener datos de usuario
+      function obtenerUsuario(callback) {
+        setTimeout(() => {
+          console.log("Usuario obtenido");
+          callback({ id: 1, nombre: "Juan" });
+        }, 1000);
+      }
+
+      // Simulación de una operación asíncrona para obtener detalles del usuario
+      function obtenerDetallesUsuario(usuarioId, callback) {
+        setTimeout(() => {
+          console.log("Detalles del usuario obtenidos para el usuario con ID:", usuarioId);
+          callback({ hobbies: ["programar", "ciclismo"], edad: 25 });
+        }, 1000);
+      }
+
+      // Simulación de una operación asíncrona para realizar alguna acción con los detalles del usuario
+      function realizarAccionConUsuario(detalleUsuario, callback) {
+        setTimeout(() => {
+          console.log("Acción realizada con los detalles del usuario:", detalleUsuario);
+          callback();
+        }, 1000);
+      }
+
+      // Ejecución del 'callback hell'
+      obtenerUsuario(function (usuario) {
+        obtenerDetallesUsuario(usuario.id, function (detalles) {
+          realizarAccionConUsuario(detalles, function () {
+            console.log("Proceso completado");
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

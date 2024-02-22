@@ -1,0 +1,26 @@
+{
+  "nombre": "Juan Pérez",
+  "profesion": "Desarrollador de Software",
+  "experiencia": [
+    {
+      "empresa": "Empresa A",
+      "rol": "Desarrollador Junior",
+      "periodo": "Enero 2020 - Diciembre 2021",
+      "descripcion": "Desarrollo de aplicaciones web utilizando HTML, CSS, y JavaScript."
+    },
+    {
+      "empresa": "Empresa B",
+      "rol": "Desarrollador Senior",
+      "periodo": "Enero 2022 - Presente",
+      "descripcion": "Liderar el desarrollo de proyectos de software complejos, enfocándome en backend con Node.js y bases de datos SQL."
+    }
+  ],
+  "educacion": [
+    {
+      "institucion": "Universidad X",
+      "grado": "Ingeniería en Computación",
+      "periodo": "2015 - 2019"
+    }
+  ],
+  "habilidades": ["HTML", "CSS", "JavaScript", "Node.js", "SQL"]
+}

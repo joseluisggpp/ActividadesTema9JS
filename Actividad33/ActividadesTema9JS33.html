@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Actividad 33</title>
+  </head>
+  <body>
+    <div id="curriculum"></div>
+    <script>
+      /*Escribe un documento .json en el que almacenes toda la información de tu currículo. Luego, por medio de la API Fetch, realiza una petición para acceder a ese documento local, léelo y muéstralo en el navegador formateado en forma de página HTML.*/
+      fetch("curriculum.json")
+        .then((response) => response.json())
+        .then((data) => {
+          const curriculumDiv = document.getElementById("curriculum");
+          curriculumDiv.innerHTML = `
+            <h1>${data.nombre} - ${data.profesion}</h1>
+            <h2>Experiencia</h2>
+            ${data.experiencia
+              .map(
+                (exp) => `
+              <div>
+                <h3>${exp.empresa} - ${exp.rol}</h3>
+                <p>${exp.periodo}</p>
+                <p>${exp.descripcion}</p>
+              </div>
+            `
+              )
+              .join("")}
+            <h2>Educación</h2>
+            ${data.educacion
+              .map(
+                (edu) => `
+              <div>
+                <h3>${edu.institucion}</h3>
+                <p>${edu.grado}, ${edu.periodo}</p>
+              </div>
+            `
+              )
+              .join("")}
+            <h2>Habilidades</h2>
+            <ul>
+              ${data.habilidades.map((habilidad) => `<li>${habilidad}</li>`).join("")}
+            </ul>
+          `;
+        })
+        .catch((error) => console.error("Error al cargar el currículum:", error));
+    </script>
+  </body>
+</html>
