@@ -32,9 +32,9 @@
                                                                  <p>Población: ${data.population}</p>`;
       });
 
-      fetchData(`${apiBase}starships/1`)
+      fetchData(`${apiBase}starships/2`)
         .then((data) => {
-          // Asegúrate de que la nave 1 está disponible; de lo contrario, ajusta el ID
+          // Asegúrate de que la nave 2 está disponible; de lo contrario, ajusta el ID
           document.getElementById("nave").innerHTML += `<p>Nombre: ${data.name}</p>
                                                               <p>Modelo: ${data.model}</p>
                                                               <p>Fabricante: ${data.manufacturer}</p>`;

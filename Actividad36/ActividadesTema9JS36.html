@@ -8,7 +8,8 @@
   <body>
     <script>
       /*Escribe un programa en el que hagas un uso combinado de la API Fetch y las funciones Async. Explica brevemente qué ventajas aporta esta solución entre todas las posibles*/
-      // Definimos una función asincrónica
+      
+      // Definimos una función asíncrona
       async function cargarPublicaciones() {
         try {
           // Usamos fetch junto con await para esperar la respuesta
@@ -22,8 +23,7 @@
           console.error("Error al cargar las publicaciones:", error);
         }
       }
-
-      // Llamamos a la función asincrónica
+      // Llamamos a la función asíncrona
       cargarPublicaciones();
     </script>
   </body>
